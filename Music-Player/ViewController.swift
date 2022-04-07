@@ -34,11 +34,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var playMusicBtn: UIButton!
     @IBOutlet weak var nextMusicBtn: UIButton!
     @IBOutlet weak var resetFavesBtn: UIButton!
+  
+    @objc func updateChangedLyricstoArray() {
+      arrOfMusic[currMusic].lyrics = lyricsTextView.text
+    }
     
     override func viewDidLoad() {
+      // To notify the changeLyrics function when textView value changed
+      NotificationCenter.default.addObserver(self, selector: #selector(updateChangedLyricstoArray), name: UITextView.textDidChangeNotification, object: nil)
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+
         // Insert music
         arrOfMusic = MusicFeeder.init().arrOfMusic
         
